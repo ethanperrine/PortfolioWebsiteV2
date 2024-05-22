@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <!-- <link rel="stylesheet" href="output.css"> -->
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/style2.css">
         <link rel="icon" type="image/gif" href="/static/media/Vendetta/glitch.gif">
     </head>
     <body>
@@ -26,24 +26,26 @@
         <video id="backgroundVideo" autoplay loop muted playsinline></video>
         <canvas id="matrixCanvas"></canvas>
         <div class="topbar mt-5 ml-5 mr-5 rounded-lg">
-            <a href="#projects-section" class="button">Projects</a>
+            <a href="javascript:app.openHome()" class="button">Home</a>
+            <a href="javascript:app.openProjects()" class="button">Projects</a>
             <a href="https://saucesec.tech/swagger/index.html" class="button">API</a>
             <!-- <a href="#contact-section" class="button">Contact</a> -->
         </div>
 
-        <h1 id="text" class="white-text"></h1>
+        <div id="home-section">
+            <h1 id="text" class="white-text"></h1>
+        </div>
 
         <!-- Content sections -->
         <div id="projects-section">
             <div class="project-container">
                 </div>
+            <p style="color: white">TEST from projects section</p>
         </div>
         
         <div id="api-section">
             <!-- API content -->
-        </div>
-        <div id="contact-section">
-            <!-- Contact content -->
+            <p style="color: white">TEST from API section</p>
         </div>
 
         <script type="module" src="/static/js/App.js"></script>

@@ -127,7 +127,10 @@ export class ThemeManager {
                 }
 
                 this.textElement.innerHTML = "";
-                slowType(this.textElement, "saucesec.tech", 150);
+                // slowType(this.textElement, "saucesec.tech", 150);
+                if (app.isHome()) {
+                    app.openHome()
+                }
             }
         } catch (error) {
             console.error(`Error loading theme: ${error}`);

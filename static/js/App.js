@@ -1,4 +1,4 @@
-import { slowType } from './SlowTyper.js';
+import {showSocials, slowType} from './SlowTyper.js';
 import { MatrixAnimation } from './MatrixAnimation.js';
 import { ThemeManager } from './ThemeManager.js';
 import { ProjectManager } from './ProjectManager.js';
@@ -10,6 +10,16 @@ class App {
         this.themeManager = new ThemeManager();
         this.textElement = document.getElementById("text");
         this.projectManager = new ProjectManager('.project-container');
+
+        this.homeSectionElement = document.getElementById("home-section");
+        this.projectsSectionElement = document.getElementById("projects-section");
+        this.apiSectionElement = document.getElementById("api-section");
+        this.projectsSectionElement.style.display = "none";
+        this.apiSectionElement.style.display = "none";
+
+        this.lastSlowType = [null, [false], 0];
+        this.lastSocials = [null, [false]];
+
         this.loadInitialProjects();
         this.initEventListeners();
     }
@@ -54,8 +64,9 @@ class App {
             welcomeScreen.style.display = 'none';
             this.showTopbar();
             this.animateButtons();
-            this.typeWelcomeMessage();
+            // this.typeWelcomeMessage();
             await this.themeManager.initTheme();
+            this.openHome();
             this.matrixAnimation.start();
             if (this.themeManager.currentThemeData && this.themeManager.currentThemeData.musicPlaylist) {
             this.themeManager.playPlayList(this.themeManager.currentThemeData.musicPlaylist);
@@ -82,7 +93,25 @@ class App {
     }
 
     typeWelcomeMessage() {
-        slowType(this.textElement, "saucesec.tech", 50);
+        if (this.lastSlowType[0] != null) {
+            this.lastSlowType[0].remove();
+        }
+        if (this.lastSocials[0] != null) {
+            this.lastSocials[0].remove();
+        }
+        this.lastSlowType = slowType(this.textElement, "saucesec.tech", 150);
+        this.lastSocials = showSocials(this.textElement, this.lastSlowType[2], [
+            {
+                url: "https://t.me/MisterTheMan",
+                icon: "https://telegram.org/img/t_logo.png",
+                bounds: [50, 50]
+            },
+            {
+                url: "https://discord.com/users/1128131957683933321",
+                icon: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/653714c1f22aef3b6921d63d_636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg",
+                bounds: [50, 70]
+            },
+        ], 150)
     }
 
     setupThemeSwitcher() {
@@ -96,7 +125,35 @@ class App {
         console.error("Change theme button not found.");
         }
     }
+
+    isHome() {
+        return this.homeSectionElement.style.display === "block"
+    }
+
+    openHome() {
+        this.lastSlowType[1][0] = true;
+        this.homeSectionElement.style.display = "block";
+        this.projectsSectionElement.style.display = "none";
+        this.apiSectionElement.style.display = "none";
+
+        this.typeWelcomeMessage()
+
+    }
+
+    openProjects() {
+        this.lastSlowType[1][0] = true;
+        this.homeSectionElement.style.display = "none";
+        this.projectsSectionElement.style.display = "block";
+        this.apiSectionElement.style.display = "none";
+    }
+
+    openApi() {
+        this.lastSlowType[1][0] = true;
+        this.homeSectionElement.style.display = "none";
+        this.projectsSectionElement.style.display = "none";
+        this.apiSectionElement.style.display = "block";
+    }
 }
 
 // Usage
-const app = new App();
+window.app = new App();
