@@ -7,7 +7,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .white-text {
@@ -178,30 +178,6 @@ html {
   background-size: cover;
 }
 
-.project-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.project-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 1;
-  transition: all 0.5s ease-in-out;
-}
-
-.project-item.slide-out {
-  opacity: 0;
-  transform: translateX(-20%);
-}
-
-.project-item.slide-in {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 .flex-center {
   display: flex;
   flex-direction: row;
@@ -221,6 +197,65 @@ html {
 
 .float-up {
   transition: ease-out 0.6s;
+}
+
+.basic-section {
+  position: absolute;
+  top: 200px;
+  left: 20%;
+  right: 20%;
+  bottom: 0px;
+  overflow: visible;
+}
+
+#projects-section > * {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+}
+
+.splitter {
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid white;
+}
+
+.project-container {
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+  position: relative;
+  height: 400px;
+  backdrop-filter: blur(15px);
+}
+
+.project-container:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.project-image-wrap {
+  padding: 5px;
+}
+
+.project-image {
+  width: 100%;
+  box-shadow: white 0 0 5px 2px;
+}
+
+.no-bars {
+  overflow: visible !important;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.full-height {
+  height: 100%;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=style2.css.map */

@@ -1,4 +1,4 @@
-import {showSocials, slowType} from './SlowTyper.js';
+import {ShowProjects, ShowSocials, SlowTyper} from './SlowTyper.js';
 import { MatrixAnimation } from './MatrixAnimation.js';
 import { ThemeManager } from './ThemeManager.js';
 import { ProjectManager } from './ProjectManager.js';
@@ -17,8 +17,18 @@ class App {
         this.projectsSectionElement.style.display = "none";
         this.apiSectionElement.style.display = "none";
 
-        this.lastSlowType = [null, [false], 0];
-        this.lastSocials = [null, [false]];
+        /**
+         * @type {SlowTyper}
+         */
+        this.slowTyper = null;
+        /**
+         * @type {ShowSocials}
+         */
+        this.lastSocials = null;
+        /**
+         * @type {ShowProjects}
+         */
+        this.lastShowProjects = null;
 
         this.loadInitialProjects();
         this.initEventListeners();
@@ -32,21 +42,6 @@ class App {
         console.log('DOMContentLoaded event Loaded');
         this.setupWelcomeScreen();
         this.setupThemeSwitcher();
-    }
-
-    async fetchProjectData() {
-        try {
-            const response = await fetch('/static/data/projects.json');
-            if (!response.ok) {
-                throw new Error(`Network response was not ok (Status: ${response.status})`);
-            }
-            const data = await response.text();
-            console.log("Raw JSON Data:", data);
-            return JSON.parse(data);
-        } catch (error) {
-            console.error('Error fetching project data:', error);
-            return [];
-        }
     }
 
     async loadInitialProjects() {
@@ -93,14 +88,11 @@ class App {
     }
 
     typeWelcomeMessage() {
-        if (this.lastSlowType[0] != null) {
-            this.lastSlowType[0].remove();
-        }
-        if (this.lastSocials[0] != null) {
-            this.lastSocials[0].remove();
-        }
-        this.lastSlowType = slowType(this.textElement, "saucesec.tech", 150);
-        this.lastSocials = showSocials(this.textElement, this.lastSlowType[2], [
+        this.slowTyper?.tempDiv?.remove?.()
+        this.lastSocials?.tempDiv?.remove?.();
+        // this.lastSlowType = slowType(this.textElement, "saucesec.tech", 150);
+        this.slowTyper = new SlowTyper(this.textElement, "saucesec.tech", 150);
+        this.lastSocials = new ShowSocials(this.textElement, this.slowTyper.duration, [
             {
                 url: "https://t.me/MisterTheMan",
                 icon: "https://telegram.org/img/t_logo.png",
@@ -112,6 +104,12 @@ class App {
                 bounds: [50, 70]
             },
         ], 150)
+    }
+
+    showProjects() {
+        this.lastShowProjects?.cancelCallback?.()
+        this.lastShowProjects?.container?.remove?.();
+        this.lastShowProjects = new ShowProjects(this.projectsSectionElement, 300);
     }
 
     setupThemeSwitcher() {
@@ -131,7 +129,8 @@ class App {
     }
 
     openHome() {
-        this.lastSlowType[1][0] = true;
+        this.slowTyper?.cancelCallback?.()
+        this.lastSocials?.cancelCallback?.()
         this.homeSectionElement.style.display = "block";
         this.projectsSectionElement.style.display = "none";
         this.apiSectionElement.style.display = "none";
@@ -141,14 +140,18 @@ class App {
     }
 
     openProjects() {
-        this.lastSlowType[1][0] = true;
+        this.slowTyper?.cancelCallback?.()
+        this.lastSocials?.cancelCallback?.()
         this.homeSectionElement.style.display = "none";
         this.projectsSectionElement.style.display = "block";
         this.apiSectionElement.style.display = "none";
+
+        this.showProjects();
     }
 
     openApi() {
-        this.lastSlowType[1][0] = true;
+        this.slowTyper?.cancelCallback?.()
+        this.lastSocials?.cancelCallback?.()
         this.homeSectionElement.style.display = "none";
         this.projectsSectionElement.style.display = "none";
         this.apiSectionElement.style.display = "block";

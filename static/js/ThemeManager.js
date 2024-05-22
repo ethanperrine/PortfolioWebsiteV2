@@ -1,6 +1,4 @@
 import { MatrixAnimation } from './MatrixAnimation.js';
-// import { MatrixCanvas } from './MatrixCanvas.js';
-import { slowType } from './SlowTyper.js';
 
 // MatrixAnimation
 let interval = null;
