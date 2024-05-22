@@ -1,0 +1,8 @@
+{
+    "name": "Space Theme",
+    "description": "WOW Video of Earf!",
+    "videoPath": "static/media/Videos/CompressedEarth.mp4",
+    "musicPlaylist": [
+        "Joyus/LCabin Fever - re6ce.mp3"
+    ]
+}

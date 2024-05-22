@@ -1,0 +1,10 @@
+{
+    "name": "European Theme",
+    "description": "Eurovision",
+    "videoPath": "static/media/Videos/CompressedPorche.mp4",
+    "musicPlaylist": [
+        "Bands/Already Rich.mp3",
+        "Bands/BLP Kosher & BabyTron - Mazel Tron.mp3",
+        "Bands/On tha line.mp3"
+    ]
+}

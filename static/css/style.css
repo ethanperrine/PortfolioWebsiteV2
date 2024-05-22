@@ -1,0 +1,202 @@
+:root {
+    --background-color: rgba(10, 10, 10, 0.85);
+    --text-color: white; 
+    --button-hover-scale: 1.35;
+    --font-family: 'Press Start 2P', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.white-text {
+    color: var(--text-color);
+}
+
+.black-text {
+    color: black;
+}
+.slide-out {
+    animation: slide-out 0.5s ease-in-out;
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-20px);
+    }
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(90% - 0.1rem - 1rem); 
+    height: 100px;
+    background-color: var(--background-color);
+    transition: top 1s ease-in-out;
+    align-items: center;
+
+    background-color: var(--background-color);
+    -webkit-backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
+}
+
+
+#text {
+    font-family: 'Press Start 2P', monospace;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 72px;
+    -webkit-user-select: none;
+    user-select: none;
+    text-rendering: optimizeLegibility;
+}
+
+
+.button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transform-origin: 50% 50%;
+    transition: ease-in-out 0.15s;
+}
+
+.button:hover {
+    cursor: pointer;
+    transform: scale(var(--button-hover-scale));
+}
+
+@keyframes progressiveEnlarge {
+    0% { font-size: 100%; }
+    25% { font-size: 110%; }
+    75% { font-size: 105%; }
+    100% { font-size: 100%; }
+}
+
+.smooth-size {
+    transition: .3s ease-out;
+}
+
+.enlarge {
+    /* display: inline-block; */
+    font-size: 120%;
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+
+}
+
+.audio-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.audio-controls button {
+    font-family: 'Press Start 2P', monospace;
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.audio-controls button:hover {
+    background-color: #333;
+}
+
+.theme-selector {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.play-button{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-size: 36px;
+    /* user-select: none; */
+}
+
+
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* min-width: 100%; */
+    /* min-height: 100%; */
+    /* width: auto; */
+    /* height: auto; */
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+    object-fit: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.project-container {
+position: relative;
+overflow: hidden;
+}
+
+.project-item {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%; 
+opacity: 1;
+transition: all 0.5s ease-in-out;
+}
+
+.project-item.slide-out { 
+    opacity: 0;
+    transform: translateX(-20%);
+}
+.project-item.slide-in {
+    opacity: 0;
+    transform: translateX(20%);
+    opacity: 1; 
+    transform: translateX(0); 
+}

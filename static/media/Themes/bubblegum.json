@@ -1,0 +1,8 @@
+{
+    "name": "Bubblegum Theme",
+    "description": "A vibrant and playful theme",
+    "videoPath": "static/media/Videos/CompressedBoyALiar.mp4",
+    "musicPlaylist": [
+        "Bubblegum/BoyALiar.mp3"
+    ]
+}
